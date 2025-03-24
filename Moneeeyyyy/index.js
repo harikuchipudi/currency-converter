@@ -82,7 +82,10 @@ async function convertCurrency() {
         if (data.data && data.data[toCurrency]) {
             let rate = data.data[toCurrency].value;
             let convertedAmount = (amount * rate).toFixed(2);
+            let resultText = generateWealthMessage(convertedAmount);
+            document.getElementById("basic-result-text").textContent = resultText;
             document.getElementById("basic-result").value = `${convertedAmount} ${toCurrency}`;
+
         } else {
             alert("Conversion rate not available.");
         }
@@ -92,6 +95,23 @@ async function convertCurrency() {
     }
 }
 
+
+//function to generate result text
+function generateWealthMessage(amount) {
+    if (amount >= 1_000_000_000) {
+        return "You are a billionaire!";
+    } else if (amount >= 1_000_000) {
+        return "You are a multi-millionaire!";
+    } else if (amount >= 100_000) {
+        return "You are a millionaire!";
+    } else if (amount >= 10_000) {
+        return "You are quite wealthy!";
+    } else if (amount >= 1_000) {
+        return "You have a good amount of money!";
+    } else {
+        return "Keep saving and growing your wealth!";
+    }
+}
 
 // Function to fetch advanced exchange rates
 // async function fetchAdvancedData() {
